@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Health Census — Dashboard</title>
+  <link rel="stylesheet" href="health_analysis.css" />
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Health Census</div>
+    <div class="controls">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="health_contact.html">Contact</a>
+      <label class="dark-toggle">
+        <input id="darkModeToggleDb" type="checkbox" />
+        <span>Dark</span>
+      </label>
+    </div>
+  </header>
+
+  <main class="dashboard-grid">
+    <section class="card">
+      <h2>Summary</h2>
+      <div id="summaryCards" class="summary-cards"></div>
+    </section>
+
+    <section class="card">
+      <h2>Conditions Distribution</h2>
+      <canvas id="condPie" height="220"></canvas>
+    </section>
+
+    <section class="card">
+      <h2>Age Distribution (by condition)</h2>
+      <canvas id="ageBar" height="220"></canvas>
+    </section>
+
+    <section class="card">
+      <h2>Recent Patients</h2>
+      <ul id="recentList" class="recent-list"></ul>
+    </section>
+  </main>
+
+  <footer class="footer">© Health Census • Frontend only</footer>
+
+  <script src="health_analysis.js"></script>
+  <script>
+    // dashboard-specific bootstrap (reads same localStorage patients)
+    document.addEventListener('DOMContentLoaded', () => {
+      if (window.initDashboard) initDashboard();
+      // wire dark mode toggle copy between pages
+      const dbToggle = document.getElementById('darkModeToggleDb');
+      const pageToggle = document.getElementById('darkModeToggle');
+      if (dbToggle && pageToggle) dbToggle.checked = pageToggle.checked;
+    });
+  </script>
+</body>
+</html>

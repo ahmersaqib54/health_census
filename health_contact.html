@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — Health Census</title>
+  <link rel="stylesheet" href="health_analysis.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">Health Census</div>
+    <div class="controls">
+      <a class="nav-link" href="index.html">Home</a>
+      <a class="nav-link" href="dashboard.html">Dashboard</a>
+    </div>
+  </header>
+
+  <main class="contact-main card">
+    <h2>Contact Us</h2>
+    <p>If you want help interpreting results, please share the condition and some details.
+      This demo does not send data externally; it only shows a client-side contact form.</p>
+
+    <form id="contactForm">
+      <label>Name</label>
+      <input id="cname" type="text" required />
+
+      <label>Email</label>
+      <input id="cemail" type="email" required />
+
+      <label>Condition</label>
+      <input id="ccondition" type="text" />
+
+      <label>Message</label>
+      <textarea id="cmessage" rows="5"></textarea>
+
+      <div class="form-actions">
+        <button type="submit" class="btn">Submit</button>
+        <button type="button" id="resetContact" class="btn ghost">Reset</button>
+      </div>
+    </form>
+  </main>
+
+  <footer class="footer">© Health Census • Demo</footer>
+  <script>
+    document.getElementById('contactForm').addEventListener('submit', e => {
+      e.preventDefault();
+      alert('Thank you — this demo does not send messages.');
+      document.getElementById('contactForm').reset();
+    });
+    document.getElementById('resetContact').addEventListener('click', () => document.getElementById('contactForm').reset());
+  </script>
+</body>
+</html>

@@ -1,56 +1,107 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Health Analysis Data</title>
-  <link rel="stylesheet" href="./health_analysis.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Health Census — Home</title>
+  <link rel="stylesheet" href="health_analysis.css" />
+  <!-- Chart.js CDN for charts on dashboard -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
-   <nav><h1>Health Analysis Census</h1>
-<ul>
-  <li><a href="index.html" id="home">Home </a></li>
-  <li><a href="health_contact.html" id="contact">Contact Us </a></li>
-  <li><input type="text" id="conditionInput" placeholder="Enter a health condition">  </li>
-  <li><button id='btnSearch'>Search</button>
-  </li>
+  <header class="topbar">
+    <div class="brand">Health Census</div>
+    <div class="controls">
+      <a class="nav-link" href="dashboard.html">Dashboard</a>
+      <a class="nav-link" href="health_contact.html">Contact</a>
+      <label class="dark-toggle">
+        <input id="darkModeToggle" type="checkbox" />
+        <span>Dark</span>
+      </label>
+    </div>
+  </header>
 
-</ul>
-</nav>
-<div class="container">
-<div class="analysisForm">
-<h1>Healthcare Data Analysis</h1>
-<div>
-<label for="name">Name:</label>
-<input type="text" id="name">
-</div>
-<div>
-<label>Gender:</label>
-<label for="male">Male</label>
-<input type="radio" name="gender" id="male" value="Male">
-<label for="female">Female</label>
-<input type="radio" name="gender" id="female" value="Female">
-</div>
-<div>
-<label for="age">Age:</label>
-<input type="number" id="age">
-</div>
-<div>
-<label for="condition">Condition:</label>
-<select id="condition">
-  <option value="">Select condition</option>
-  <option value="Diabetes">Diabetes</option>
-  <option value="Thyroid">Thyroid</option>
-  <option value="High Blood Pressure">High Blood Pressure</option>
-</select>
-</div>
-<button id="addPatient">Add Patient</button>
-<h2>Analysis Report</h2>
-<div id="report"></div>
-</div>
-<div class="searchCondition">
-    <div id="result"></div>
-</div>
-</div>
-<script src="health_analysis.js"></script>
+  <main class="main-grid">
+    <section class="card form-card">
+      <h2>Add / Edit Patient</h2>
+      <form id="patientForm">
+        <input type="hidden" id="patientId" />
+
+        <label>Name</label>
+        <input id="name" type="text" placeholder="Full name" />
+
+        <label>Gender</label>
+        <div class="inline">
+          <label><input name="gender" type="radio" value="Male" /> Male</label>
+          <label><input name="gender" type="radio" value="Female" /> Female</label>
+        </div>
+
+        <label>Age</label>
+        <input id="age" type="number" min="0" placeholder="Age" />
+
+        <label>Condition</label>
+        <select id="condition">
+          <option value="">-- Select condition --</option>
+          <option>Diabetes</option>
+          <option>Thyroid</option>
+          <option>High Blood Pressure</option>
+        </select>
+
+        <div class="form-actions">
+          <button id="addPatient" class="btn">Save</button>
+          <button id="clearForm" class="btn ghost" type="button">Clear</button>
+        </div>
+      </form>
+
+      <h3>Analysis Report</h3>
+      <div id="report" class="report"></div>
+    </section>
+
+    <section class="card list-card">
+      <div class="list-header">
+        <h2>Patients</h2>
+        <div>
+          <input id="searchPatient" placeholder="Search by name or condition" />
+          <select id="sortBy">
+            <option value="added">Sort: Added</option>
+            <option value="name">Sort: Name</option>
+            <option value="age">Sort: Age</option>
+            <option value="condition">Sort: Condition</option>
+          </select>
+        </div>
+      </div>
+
+      <table class="patients-table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Gender</th>
+            <th>Age</th>
+            <th>Condition</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="patientTable"></tbody>
+      </table>
+
+      <div class="list-footer">
+        <button id="exportCsv" class="btn">Export CSV</button>
+        <button id="importSample" class="btn ghost">Load Sample Data</button>
+      </div>
+    </section>
+
+    <section class="card search-card">
+      <h2>Condition Lookup</h2>
+      <div class="lookup">
+        <input id="conditionInput" placeholder="Type condition name (e.g. Thyroid)" />
+        <button id="btnSearch" class="btn">Search</button>
+      </div>
+      <div id="result" class="condition-result"></div>
+    </section>
+  </main>
+
+  <footer class="footer">© Health Census • Frontend only (LocalStorage)</footer>
+
+  <script src="health_analysis.js"></script>
 </body>
 </html>
